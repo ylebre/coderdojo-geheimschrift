@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<body>
+<h2>Voer hier de text in om te coderen:</h2>
+<input type="text" data-simply-field="text"><button>Codeer!</button>
+
+<h2>Dan komt hier de gecodeerde versie:</h2>
+<input data-simply-transformer="rot13" type="text" data-simply-field="text"><button>Decodeer!</button>
+
+<script src="https://cdn.simplyedit.io/1/simply-edit.js"></script>
+<script>
+	function rot13(s) {
+		var code1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+		var code2 = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+
+		return s.replace(/[A-Za-z]/g, function (c) {
+			return code1.charAt(
+				code2.indexOf(c)
+			);
+		});
+	}
+
+	editor.transformers = {
+		"rot13" : {
+			render : function(data) {
+				return rot13(data);
+			},
+			extract : function(data) {
+				return rot13(data);
+			}
+		}
+	};
+</script>	
+</body>
+</html>
